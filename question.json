@@ -1,0 +1,24 @@
+{
+  "JAVA": {
+    "1": "El candidato demostró conocimiento sobre los pilares de la POO",
+    "2": "El candidato demostró que sabe la diferencia entre Stack y Heap",
+    "3": "El candidato demostró que entiende qué es una Interfaz",
+    "4": "El candidato demostró que sabe qué es un memory leak",
+    "5": "El candidato demostró que sabe cómo mejorar el rendimiento con caching, balanceo de carga y asincronía",
+    "6": "El candidato demostró conocimiento de arquitecturas Monolítica, Microservicios y Serverless"
+  },
+  "IOS": {
+    "1": "El candidato demostró conocimiento sobre patrones de diseño en iOS (MVC, MVVM, Singleton, Delegate)",
+    "2": "El candidato demostró que sabe diferenciar Swift de SwiftUI",
+    "3": "El candidato demostró que sabe qué son los CocoaPods y para qué sirven",
+    "4": "El candidato demostró conocimiento sobre UITableView y UITableViewCell",
+    "5": "El candidato demostró que sabe la función del atributo @objc en Swift"
+  },
+  "ANDROID": {
+    "1": "El candidato demostró conocimiento sobre los componentes básicos de una aplicación Android",
+    "2": "El candidato demostró que sabe qué es Gradle y para qué sirve",
+    "3": "El candidato demostró que sabe qué es un Fragment",
+    "4": "El candidato demostró que sabe para qué se utiliza AndroidManifest",
+    "5": "El candidato demostró conocimiento sobre el ciclo de vida de un Activity"
+  }
+}
