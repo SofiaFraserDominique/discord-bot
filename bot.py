@@ -34,7 +34,7 @@ def decrypt(text: str) -> str:
 # ======================
 # CARGAR PREGUNTAS
 # ======================
-with open("question.json", "r", encoding="utf-8") as f:
+with open("questions.json", "r", encoding="utf-8") as f:
     PREGUNTAS = json.load(f)
 
 
@@ -59,30 +59,36 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # Ejemplo: !Run <codigo_encriptado>
     if message.content.startswith("!Run "):
-        encrypted = message.content[len("!Run "):].strip()
-        decrypted = decrypt(encrypted)
+       
+        entrada = message.content[len("!Run "):].strip()
+        print(f"[DEBUG] Texto recibido: {entrada}")
 
         try:
-            partes = decrypted.split("_")
-            if len(partes) != 3:
-                await message.reply(f"⚠️ Formato inválido: esperaba 3 partes (camino_pregunta_resultado), recibí {len(partes)}")
+            partes = entrada.split("_")
+            if len(partes) < 3 or len(partes) % 2 == 0:
+                await message.reply("⚠️ Formato inválido. Esperado: CAMINO_PREGUNTA_RESULTADO...")
                 return
 
-            caminho, pregunta_id, resultado = partes
+            camino = partes[0].upper()
+            pares = partes[1:]  # resto da mensagem (id/resultado)
 
+            feedback = f"-> Candidato: {message.author.mention}\n"
+            feedback += f"-> Camino elegido: {camino}\n"
 
-            camino = camino.upper()
-            descripcion = PREGUNTAS.get(camino, {}).get(pregunta_id, "Pregunta desconocida")
+            # Processar cada par (id, resultado)
+            for i in range(0, len(pares), 2):
+                pregunta_id = pares[i]
+                resultado = pares[i + 1]
 
-            acierto = "✅ Correcto" if resultado in ["1", "true", "True"] else "❌ Incorrecto"
-            feedback = (
-                f"-> Candidato: {message.author.mention}\n"
-                f"-> Camino elegido: {camino}\n"
-                f"-> Pregunta {pregunta_id}: {acierto}\n"
-                f"-> Descripción: {descripcion if 'Correcto' in acierto else 'El candidato no domina este conocimiento'}"
-            )
+                descripcion = PREGUNTAS.get(camino, {}).get(pregunta_id, "Pregunta desconocida")
+                acierto = "✅ Correcto" if resultado in ["1", "true", "True"] else "❌ Incorrecto"
+
+                feedback += f"-> Pregunta {pregunta_id}: {acierto}\n"
+                if "Correcto" in acierto:
+                    feedback += f"   Descripción: {descripcion}\n"
+                else:
+                    feedback += f"   Descripción: El candidato no domina este conocimiento\n"
 
             await message.reply(feedback)
 
