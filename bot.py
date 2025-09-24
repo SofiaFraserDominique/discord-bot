@@ -1,6 +1,6 @@
 import os
 import json
-import disnake as discord
+import nextcord as discord
 from dotenv import load_dotenv
 
 # ======================
