@@ -65,7 +65,13 @@ async def on_message(message):
         decrypted = decrypt(encrypted)
 
         try:
-            camino, pregunta_id, resultado = decrypted.split("_")
+            partes = decrypted.split("_")
+            if len(partes) != 3:
+                await message.reply(f"⚠️ Formato inválido: esperaba 3 partes (camino_pregunta_resultado), recibí {len(partes)}")
+                return
+
+            caminho, pregunta_id, resultado = partes
+
 
             camino = camino.upper()
             descripcion = PREGUNTAS.get(camino, {}).get(pregunta_id, "Pregunta desconocida")
