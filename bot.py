@@ -34,7 +34,7 @@ def decrypt(text: str) -> str:
 # ======================
 # CARGAR PREGUNTAS
 # ======================
-with open("questions.json", "r", encoding="utf-8") as f:
+with open("question.json", "r", encoding="utf-8") as f:
     PREGUNTAS = json.load(f)
 
 
